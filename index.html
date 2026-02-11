@@ -1,16 +1,269 @@
-# Love Note
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-This is a lovely note application that allows you to send sweet notes to your loved ones.
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-## Features
-- Send notes
-- Customize notes
-- Receive notes from others
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
 
-## Installation
-1. Clone the repository
-2. Navigate to the project directory
-3. Run `npm install` to install dependencies
+        h1 {
+            font-size: 5rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
 
-## Usage
-- Run `npm start` to launch the application.
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: #ff6b8a;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .message {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-in 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        button {
+            margin-top: 2rem;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+        }
+
+        button:active {
+            transform: translateY(-2px);
+        }
+
+        .big-heart {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 20rem;
+            color: #ff6b8a;
+            opacity: 0;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .big-heart.show {
+            animation: heartBurst 1.5s ease-out forwards;
+        }
+
+        @keyframes heartBurst {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnim 1s ease-out forwards;
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                opacity: 1;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1) translate(var(--tx), var(--ty));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>I Love You ❤️</h1>
+        <p class="message">You mean the world to me!</p>
+        <button onclick="showLove()">Click for a Surprise!</button>
+    </div>
+
+    <div class="big-heart" id="bigHeart">❤️</div>
+
+    <script>
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // Create hearts continuously
+        setInterval(createHeart, 500);
+
+        // Show love function
+        function showLove() {
+            const bigHeart = document.getElementById('bigHeart');
+            bigHeart.classList.add('show');
+            
+            // Create sparkles
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => createSparkle(), i * 50);
+            }
+
+            setTimeout(() => {
+                bigHeart.classList.remove('show');
+            }, 1500);
+        }
+
+        // Create sparkle effect
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            
+            const x = (Math.random() - 0.5) * 400;
+            const y = (Math.random() - 0.5) * 400;
+            
+            sparkle.style.setProperty('--tx', x + 'px');
+            sparkle.style.setProperty('--ty', y + 'px');
+            sparkle.style.left = '50%';
+            sparkle.style.top = '50%';
+            
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+
+        // Add click effect anywhere on screen
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName !== 'BUTTON') {
+                for (let i = 0; i < 5; i++) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.style.position = 'absolute';
+                    heart.style.left = e.pageX + 'px';
+                    heart.style.top = e.pageY + 'px';
+                    heart.style.fontSize = '2rem';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.animation = 'floatUp 2s ease-out forwards';
+                    heart.style.animationDelay = (i * 0.1) + 's';
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => heart.remove(), 2000);
+                }
+            }
+        });
+
+        // Add float up animation for click hearts
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) scale(0);
+                }
+                50% {
+                    opacity: 1;
+                    transform: translateY(-50px) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100px) scale(0.5);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
