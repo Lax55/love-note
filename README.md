@@ -1,145 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For You ❤️</title>
-  <style>
-    :root {
-      --primary-red: #cc0000;
-      --highlight-red: #ff8080;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      margin: 0;
-      background: radial-gradient(circle, #ffccd5, #ff4d6d);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: hidden;
-    }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-    /* Floating background hearts */
-    .bg-heart {
-      position: absolute;
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 20px;
-      animation: float 6s linear infinite;
-      z-index: 0;
-    }
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
 
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-    }
+        h1 {
+            font-size: 5rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
 
-    .container {
-      position: relative;
-      text-align: center;
-      z-index: 1;
-      animation: breathe 3s ease-in-out infinite;
-    }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
 
-    .teddy {
-      position: relative;
-      width: 220px;
-      height: 280px;
-      margin: 0 auto;
-    }
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: #ff6b8a;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0;
+        }
 
-    .part {
-      background: radial-gradient(circle at 35% 35%, var(--highlight-red), var(--primary-red));
-      border-radius: 50%;
-      position: absolute;
-      box-shadow: inset -6px -10px 18px rgba(0,0,0,0.3),
-                  inset 6px 8px 14px rgba(255,255,255,0.3),
-                  0 10px 20px rgba(0,0,0,0.1);
-    }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-    /* Positioning */
-    .head { width: 120px; height: 110px; top: 0; left: 50px; z-index: 3; }
-    .ear-left { width: 45px; height: 45px; top: -10px; left: 35px; z-index: 2; }
-    .ear-right { width: 45px; height: 45px; top: -10px; right: 35px; z-index: 2; }
-    .body { width: 150px; height: 140px; bottom: 30px; left: 35px; border-radius: 50% 50% 45% 45%; z-index: 1; }
-    .arm-left { width: 55px; height: 90px; top: 100px; left: 10px; border-radius: 50px; transform: rotate(20deg); z-index: 4; }
-    .arm-right { width: 55px; height: 90px; top: 100px; right: 10px; border-radius: 50px; transform: rotate(-20deg); z-index: 4; }
-    .leg-left { width: 75px; height: 75px; bottom: 0px; left: 25px; z-index: 2; }
-    .leg-right { width: 75px; height: 75px; bottom: 0px; right: 25px; z-index: 2; }
+        .message {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-in 1s forwards;
+        }
 
-    /* Face Details */
-    .eye { position: absolute; top: 45px; width: 12px; height: 12px; background: #1a0000; border-radius: 50%; z-index: 5; }
-    .eye-left { left: 30px; }
-    .eye-right { right: 30px; }
-    .eye::after { content: ''; position: absolute; width: 4px; height: 4px; background: white; border-radius: 50%; top: 2px; left: 2px; }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
 
-    .snout {
-        position: absolute; width: 40px; height: 30px; background: #ffb3b3; 
-        border-radius: 50%; top: 60px; left: 40px; z-index: 4;
-    }
-    .nose { position: absolute; top: 5px; left: 12px; width: 16px; height: 10px; background: #330000; border-radius: 50%; }
+        button {
+            margin-top: 2rem;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: bold;
+        }
 
-    .text {
-      margin-top: 20px;
-      font-size: 26px;
-      color: white;
-      font-weight: bold;
-      text-shadow: 0 0 10px rgba(255,255,255,0.8);
-      letter-spacing: 2px;
-    }
+        button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+        }
 
-    /* Animations */
-    @keyframes breathe {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
+        button:active {
+            transform: translateY(-2px);
+        }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #fff, 0 0 10px #ff4d6d; }
-      to { text-shadow: 0 0 15px #fff, 0 0 30px #ff4d6d; }
-    }
+        .big-heart {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 20rem;
+            color: #ff6b8a;
+            opacity: 0;
+            z-index: 5;
+            pointer-events: none;
+        }
 
-    .text { animation: glow 1.5s infinite alternate; }
-  </style>
+        .big-heart.show {
+            animation: heartBurst 1.5s ease-out forwards;
+        }
+
+        @keyframes heartBurst {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnim 1s ease-out forwards;
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                opacity: 1;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1) translate(var(--tx), var(--ty));
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <script>
-    for (let i = 0; i < 15; i++) {
-      let heart = document.createElement('div');
-      heart.className = 'bg-heart';
-      heart.innerHTML = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDelay = Math.random() * 5 + 's';
-      heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-      document.body.appendChild(heart);
-    }
-  </script>
-
-  <div class="container">
-    <div class="teddy">
-      <div class="part ear-left"></div>
-      <div class="part ear-right"></div>
-      <div class="part head">
-        <div class="eye eye-left"></div>
-        <div class="eye eye-right"></div>
-        <div class="snout">
-            <div class="nose"></div>
-        </div>
-      </div>
-      <div class="part arm-left"></div>
-      <div class="part arm-right"></div>
-      <div class="part body"></div>
-      <div class="part leg-left"></div>
-      <div class="part leg-right"></div>
+    <div class="container">
+        <h1>I Love You ❤️</h1>
+        <p class="message">You mean the world to me!</p>
+        <button onclick="showLove()">Click for a Surprise!</button>
     </div>
-    <div class="text">I LOVE YOU ❤️</div>
-  </div>
 
+    <div class="big-heart" id="bigHeart">❤️</div>
+
+    <script>
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // Create hearts continuously
+        setInterval(createHeart, 500);
+
+        // Show love function
+        function showLove() {
+            const bigHeart = document.getElementById('bigHeart');
+            bigHeart.classList.add('show');
+            
+            // Create sparkles
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => createSparkle(), i * 50);
+            }
+
+            setTimeout(() => {
+                bigHeart.classList.remove('show');
+            }, 1500);
+        }
+
+        // Create sparkle effect
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            
+            const x = (Math.random() - 0.5) * 400;
+            const y = (Math.random() - 0.5) * 400;
+            
+            sparkle.style.setProperty('--tx', x + 'px');
+            sparkle.style.setProperty('--ty', y + 'px');
+            sparkle.style.left = '50%';
+            sparkle.style.top = '50%';
+            
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+
+        // Add click effect anywhere on screen
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName !== 'BUTTON') {
+                for (let i = 0; i < 5; i++) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.style.position = 'absolute';
+                    heart.style.left = e.pageX + 'px';
+                    heart.style.top = e.pageY + 'px';
+                    heart.style.fontSize = '2rem';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.animation = 'floatUp 2s ease-out forwards';
+                    heart.style.animationDelay = (i * 0.1) + 's';
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => heart.remove(), 2000);
+                }
+            }
+        });
+
+        // Add float up animation for click hearts
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) scale(0);
+                }
+                50% {
+                    opacity: 1;
+                    transform: translateY(-50px) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100px) scale(0.5);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
-
-
-
-
